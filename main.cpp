@@ -5,7 +5,7 @@ class polynomial{
 private:
     const int m_amount;
     const int * m_coefficients;
-    constexpr int pow(const int number, const int degree) const{
+    static constexpr int pow(const int number, const int degree) {
         int result = 1;
         for (int i = 0; i <= degree; ++i) {
             result *= number;
@@ -23,16 +23,16 @@ public:
     constexpr int solve(const int point) const{
         int sum = 0;
         for (int i = 0; i < m_amount; ++i) {
-            sum+= pow(m_coefficients[i], i);
+            sum+= m_coefficients[i] * pow(point, i);
         }
-        return sum;
+        return sum / point;
       }
 };
 
 int main() {
     constexpr int amount = 3;
-    constexpr int vec[] = {1,2,3};
+    constexpr int vec[] = {3,2,3};
     const polynomial poly(amount, vec);
-    std::cout << poly.solve(2);
+    std::cout << poly.solve(50);
     return 0;
 }
